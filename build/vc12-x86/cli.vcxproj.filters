@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\input\input.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\input\yuv.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\input\y4m.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\output.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\reconplay.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\yuv.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\y4m.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\raw.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\compat\getopt\getopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\x265.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\source\x265-extras.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\input\input.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\input\y4m.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\input\yuv.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\output.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\raw.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\reconplay.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\y4m.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\output\yuv.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\compat\getopt\getopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\x265.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\x265cli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\YuqiaoDeng\Desktop\x265\source\x265-extras.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\YuqiaoDeng\Desktop\x265\source\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\YuqiaoDeng\Desktop\x265\COPYING" />
+    <None Include="C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86\x265.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86\x265.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E61332FC-D7A7-3D93-A2B6-BAC537FE8AE2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{34ABAA2E-D14F-3371-8A5A-43B72124C77C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{C0E29EA4-A9A4-3817-81AE-FF340C83EF65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="output">
+      <UniqueIdentifier>{9FD9EEA4-3AB3-34CB-ACF0-7074D986D784}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

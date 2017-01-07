@@ -1,0 +1,11 @@
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/CMakeFiles/cli.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/CMakeFiles/install.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/CMakeFiles/uninstall.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/CMakeFiles/x265-shared.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/CMakeFiles/x265-static.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/CMakeFiles/ALL_BUILD.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/CMakeFiles/ZERO_CHECK.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/encoder/CMakeFiles/install.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/encoder/CMakeFiles/encoder.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/common/CMakeFiles/install.dir
+/Users/Wei/Documents/Agora/Project/x265/build/xcode/common/CMakeFiles/common.dir

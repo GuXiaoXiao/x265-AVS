@@ -1,0 +1,96 @@
+Determining if the strtok_r exist failed with the following output:
+Change Dir: C:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe" "cmTC_54651.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=10.0"
+Microsoft(R) 生成引擎版本 4.6.79.0
+[Microsoft .NET Framework 版本 4.0.30319.42000]
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2017/1/3 21:28:29。
+节点 1 上的项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_54651.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_54651.dir\Debug\”。
+  正在创建目录“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\Debug\”。
+InitializeBuildStatus:
+  正在创建“cmTC_54651.dir\Debug\cmTC_54651.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_54651.dir\Debug\\" /Fd"cmTC_54651.dir\Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:queue CheckSymbolExists.c
+  用于 80x86 的 Microsoft (R) 32 位 C/C++ 优化编译器 16.00.40219.01 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_54651.dir\Debug\\" /Fd"cmTC_54651.dir\Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:queue CheckSymbolExists.c
+  
+  CheckSymbolExists.c
+CheckSymbolExists.c(8): error C2065: “strtok_r”: 未声明的标识符 [C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_54651.vcxproj]
+已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_54651.vcxproj”(默认目标)的操作 - 失败。
+
+生成失败。
+
+“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_54651.vcxproj”(默认目标) (1) ->
+(ClCompile 目标) -> 
+  CheckSymbolExists.c(8): error C2065: “strtok_r”: 未声明的标识符 [C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_54651.vcxproj]
+
+    0 个警告
+    1 个错误
+
+已用时间 00:00:00.82
+
+File C:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtok_r
+  return ((int*)(&strtok_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if files getopt.h exist failed with the following output:
+Change Dir: C:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe" "cmTC_92704.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=10.0"
+Microsoft(R) 生成引擎版本 4.6.79.0
+[Microsoft .NET Framework 版本 4.0.30319.42000]
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2017/1/3 21:28:31。
+节点 1 上的项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_92704.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_92704.dir\Debug\”。
+  正在创建目录“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\Debug\”。
+InitializeBuildStatus:
+  正在创建“cmTC_92704.dir\Debug\cmTC_92704.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_92704.dir\Debug\\" /Fd"cmTC_92704.dir\Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:queue CheckIncludeFiles.c
+  用于 80x86 的 Microsoft (R) 32 位 C/C++ 优化编译器 16.00.40219.01 版
+  版权所有(C) Microsoft Corporation。保留所有权利。
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_92704.dir\Debug\\" /Fd"cmTC_92704.dir\Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:queue CheckIncludeFiles.c
+  
+  CheckIncludeFiles.c
+CheckIncludeFiles.c(2): fatal error C1083: 无法打开包括文件:“getopt.h”: No such file or directory [C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_92704.vcxproj]
+已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_92704.vcxproj”(默认目标)的操作 - 失败。
+
+生成失败。
+
+“C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_92704.vcxproj”(默认目标) (1) ->
+(ClCompile 目标) -> 
+  CheckIncludeFiles.c(2): fatal error C1083: 无法打开包括文件:“getopt.h”: No such file or directory [C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\CMakeFiles\CMakeTmp\cmTC_92704.vcxproj]
+
+    0 个警告
+    1 个错误
+
+已用时间 00:00:00.71
+
+Source:
+/* */
+#include <getopt.h>
+
+
+int main(void){return 0;}
+

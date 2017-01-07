@@ -1,0 +1,60 @@
+﻿生成启动时间为 2017/1/3 21:21:51。
+     1>项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\x265-static.vcxproj”在节点 2 上(Build 个目标)。
+     1>CustomBuild:
+         Building Custom Rule C:/Users/YuqiaoDeng/Desktop/x265/source/CMakeLists.txt
+         CMake does not need to re-run because C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\CMakeFiles\generate.stamp is up-to-date.
+       Lib:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:"C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\Release\x265-static.lib" /NOLOGO /MACHINE:X64  /machine:x64 "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\analysis.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\search.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\bitcost.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\motion.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\slicetype.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\frameencoder.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\framefilter.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\level.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\nal.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\sei.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\sao.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\entropy.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\dpb.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\ratecontrol.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\reference.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\encoder.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\api.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\weightPrediction.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\winxp.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\primitives.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\pixel.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\dct.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\ipfilter.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\intrapred.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\loopfilter.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\constants.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\cpu.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\version.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\threading.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\threadpool.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\wavefront.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\md5.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\bitstream.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\yuv.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\shortyuv.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\picyuv.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\common.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\param.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\frame.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\framedata.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\cudata.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\slice.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\lowres.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\piclist.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\predict.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\scalinglist.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\quant.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\common\common.dir\Release\deblock.obj"
+     1>LINK : fatal error LNK1181: 无法打开输入文件“C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.dir\Release\encoder.obj”
+     1>已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\x265-static.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.92

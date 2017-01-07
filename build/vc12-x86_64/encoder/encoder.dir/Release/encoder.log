@@ -1,0 +1,12 @@
+﻿生成启动时间为 2017/1/3 21:21:49。
+     1>项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /IC:\Users\YuqiaoDeng\Desktop\x265\source\. /IC:\Users\YuqiaoDeng\Desktop\x265\source\common /IC:\Users\YuqiaoDeng\Desktop\x265\source\encoder /I"C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64" /nologo /W4 /WX- /MP /O2 /Ob2 /D WIN32 /D _WINDOWS /D NDEBUG /D X265_ARCH_X86=1 /D X86_64=1 /D _CRT_SECURE_NO_WARNINGS /D HAVE_INT_TYPES_H=1 /D HIGH_BIT_DEPTH=0 /D X265_DEPTH=8 /D EXPORT_C_API=1 /D X265_NS=x265 /D _WIN32_WINNT=_WIN32_WINNT_WIN7 /D "CMAKE_INTDIR=\"Release\"" /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"encoder.dir\Release\\" /Fd"encoder.dir\Release\vc120.pdb" /Gd /TP /wd4701 /errorReport:prompt C:\Users\YuqiaoDeng\Desktop\x265\source\encoder\encoder.cpp
+         encoder.cpp
+     1>C:\Users\YuqiaoDeng\Desktop\x265\source\encoder\encoder.cpp(269): error C2065: “INT16_MAX”: 未声明的标识符
+     1>C:\Users\YuqiaoDeng\Desktop\x265\source\encoder\encoder.cpp(287): error C2065: “INT16_MAX”: 未声明的标识符
+     1>已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265\build\vc12-x86_64\encoder\encoder.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:01.28

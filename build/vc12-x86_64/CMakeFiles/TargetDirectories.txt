@@ -1,0 +1,10 @@
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/CMakeFiles/x265-static.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/CMakeFiles/x265-shared.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/CMakeFiles/cli.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/CMakeFiles/INSTALL.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/CMakeFiles/ALL_BUILD.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/CMakeFiles/ZERO_CHECK.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/encoder/CMakeFiles/encoder.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/encoder/CMakeFiles/INSTALL.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/common/CMakeFiles/common.dir
+C:/Users/YuqiaoDeng/Desktop/x265/build/vc12-x86_64/common/CMakeFiles/INSTALL.dir

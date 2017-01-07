@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{526D4B5A-533F-3886-A018-A0B79FB51D9A}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>common</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">common.dir\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">common.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">common</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">common.dir\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">common.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">common</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">common.dir\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">common.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">common</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">common.dir\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">common.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">common</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;X265_ARCH_X86=1;_CRT_SECURE_NO_WARNINGS;HAVE_INT_TYPES_H=1;HIGH_BIT_DEPTH=0;X265_DEPTH=8;EXPORT_C_API=1;X265_NS=x265;_WIN32_WINNT=_WIN32_WINNT_WIN7;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\YuqiaoDeng\Desktop\x265\source\.;C:\Users\YuqiaoDeng\Desktop\x265\source\common;C:\Users\YuqiaoDeng\Desktop\x265\source\encoder;C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\source\common\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+D:\CMake\bin\cmake.exe -HC:/Users/YuqiaoDeng/Desktop/x265/source -BC:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64 --check-stamp-file C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;D:\CMake\share\cmake-3.7\Modules\CMakeConfigurableFile.in;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+D:\CMake\bin\cmake.exe -HC:/Users/YuqiaoDeng/Desktop/x265/source -BC:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64 --check-stamp-file C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;D:\CMake\share\cmake-3.7\Modules\CMakeConfigurableFile.in;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+D:\CMake\bin\cmake.exe -HC:/Users/YuqiaoDeng/Desktop/x265/source -BC:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64 --check-stamp-file C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;D:\CMake\share\cmake-3.7\Modules\CMakeConfigurableFile.in;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+D:\CMake\bin\cmake.exe -HC:/Users/YuqiaoDeng/Desktop/x265/source -BC:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64 --check-stamp-file C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/YuqiaoDeng/Desktop/x265/source/common/CMakeLists.txt;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;D:\CMake\share\cmake-3.7\Modules\CMakeConfigurableFile.in;C:\Users\YuqiaoDeng\Desktop\x265\source\common\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\YuqiaoDeng\Desktop\x265\build\vc10-x86_64\common\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\common\winxp.h" />
+    <ClInclude Include="..\..\..\source\common\primitives.h" />
+    <ClInclude Include="..\..\..\source\common\constants.h" />
+    <ClInclude Include="..\..\..\source\common\cpu.h" />
+    <ClInclude Include="..\..\..\source\common\threading.h" />
+    <ClInclude Include="..\..\..\source\common\threadpool.h" />
+    <ClInclude Include="..\..\..\source\common\wavefront.h" />
+    <ClInclude Include="..\..\..\source\common\md5.h" />
+    <ClInclude Include="..\..\..\source\common\bitstream.h" />
+    <ClInclude Include="..\..\..\source\common\yuv.h" />
+    <ClInclude Include="..\..\..\source\common\shortyuv.h" />
+    <ClInclude Include="..\..\..\source\common\picyuv.h" />
+    <ClInclude Include="..\..\..\source\common\common.h" />
+    <ClInclude Include="..\..\..\source\common\param.h" />
+    <ClInclude Include="..\..\..\source\common\frame.h" />
+    <ClInclude Include="..\..\..\source\common\framedata.h" />
+    <ClInclude Include="..\..\..\source\common\cudata.h" />
+    <ClInclude Include="..\..\..\source\common\slice.h" />
+    <ClInclude Include="..\..\..\source\common\lowres.h" />
+    <ClInclude Include="..\..\..\source\common\mv.h" />
+    <ClInclude Include="..\..\..\source\common\piclist.h" />
+    <ClInclude Include="..\..\..\source\common\predict.h" />
+    <ClInclude Include="..\..\..\source\common\scalinglist.h" />
+    <ClInclude Include="..\..\..\source\common\quant.h" />
+    <ClInclude Include="..\..\..\source\common\contexts.h" />
+    <ClInclude Include="..\..\..\source\common\deblock.h" />
+    <ClCompile Include="..\..\..\source\common\winxp.cpp"  />
+    <ClCompile Include="..\..\..\source\common\primitives.cpp"  />
+    <ClCompile Include="..\..\..\source\common\pixel.cpp"  />
+    <ClCompile Include="..\..\..\source\common\dct.cpp"  />
+    <ClCompile Include="..\..\..\source\common\ipfilter.cpp"  />
+    <ClCompile Include="..\..\..\source\common\intrapred.cpp"  />
+    <ClCompile Include="..\..\..\source\common\loopfilter.cpp"  />
+    <ClCompile Include="..\..\..\source\common\constants.cpp"  />
+    <ClCompile Include="..\..\..\source\common\cpu.cpp"  />
+    <ClCompile Include="..\..\..\source\common\version.cpp" >
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">X265_VERSION=0.0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">X265_VERSION=0.0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">X265_VERSION=0.0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">X265_VERSION=0.0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\common\threading.cpp"  />
+    <ClCompile Include="..\..\..\source\common\threadpool.cpp"  />
+    <ClCompile Include="..\..\..\source\common\wavefront.cpp"  />
+    <ClCompile Include="..\..\..\source\common\md5.cpp"  />
+    <ClCompile Include="..\..\..\source\common\bitstream.cpp"  />
+    <ClCompile Include="..\..\..\source\common\yuv.cpp"  />
+    <ClCompile Include="..\..\..\source\common\shortyuv.cpp"  />
+    <ClCompile Include="..\..\..\source\common\picyuv.cpp"  />
+    <ClCompile Include="..\..\..\source\common\common.cpp"  />
+    <ClCompile Include="..\..\..\source\common\param.cpp"  />
+    <ClCompile Include="..\..\..\source\common\frame.cpp"  />
+    <ClCompile Include="..\..\..\source\common\framedata.cpp"  />
+    <ClCompile Include="..\..\..\source\common\cudata.cpp"  />
+    <ClCompile Include="..\..\..\source\common\slice.cpp"  />
+    <ClCompile Include="..\..\..\source\common\lowres.cpp"  />
+    <ClCompile Include="..\..\..\source\common\piclist.cpp"  />
+    <ClCompile Include="..\..\..\source\common\predict.cpp"  />
+    <ClCompile Include="..\..\..\source\common\scalinglist.cpp"  />
+    <ClCompile Include="..\..\..\source\common\quant.cpp"  />
+    <ClCompile Include="..\..\..\source\common\deblock.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/Users/YuqiaoDeng/Desktop/x265/build/vc10-x86_64/ZERO_CHECK.vcxproj">
+      <Project>DF8181F7-39B5-36F2-9877-52280A975B08</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
