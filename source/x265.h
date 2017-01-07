@@ -290,7 +290,7 @@ typedef enum
     X265_HEX_SEARCH,
     X265_UMH_SEARCH,
     X265_STAR_SEARCH,
-    X265_SEA,				
+    X265_SEA,
     X265_FULL_SEARCH
 } X265_ME_METHODS;
 

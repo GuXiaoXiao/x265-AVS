@@ -66,32 +66,30 @@ static void sigint_handler(int)
     b_ctrl_c = 1;
 }
 
-/* 命令行接口 */
 struct CLIOptions
 {
-    InputFile* input;				// 输入文件，抽象类, 定义在 \input\input.h 中
-    ReconFile* recon;				// 重构文件，抽象类，定义在 \output\output.h 中
-    OutputFile* output;				// 输出文件，抽象类，定义在 \output\output.h 中
-    FILE*       qpfile;				// 量化因子文件指针
-    FILE*       csvfpt;				// csv日志文件指针
-    const char* csvfn;				// csv日志文件名
+    InputFile* input;
+    ReconFile* recon;
+    OutputFile* output;
+    FILE*       qpfile;
+    FILE*       csvfpt;
+    const char* csvfn;
     const char* reconPlayCmd;
     const x265_api* api;
-    x265_param* param;				// x265编码器参数集
-    bool bProgress;					// 是否输出编码进度和其他一些编码状态数据
-    bool bForceY4m;					// 如果输入文件是Y4M格式，需要强制指定输入格式
+    x265_param* param;
+    bool bProgress;
+    bool bForceY4m;
     bool bDither;
-    int csvLogLevel;				// csv日志级别，log level定义在 x265.h中
-    uint32_t seek;					// 输入视频起始需要跳过的帧数
-    uint32_t framesToBeEncoded;		// 待编码的帧数
-    uint64_t totalbytes;			// 已编码的数据字节数
-    int64_t startTime;				// 起始编码时间点
-    int64_t prevUpdateTime;			// 上一次编码信息输出的时间点
+    int csvLogLevel;
+    uint32_t seek;              // number of frames to skip from the beginning
+    uint32_t framesToBeEncoded; // number of frames to encode
+    uint64_t totalbytes;
+    int64_t startTime;
+    int64_t prevUpdateTime;
 
-    /* in microseconds 相邻两次编码状态输出的最小时间间隔，单位微妙*/
+    /* in microseconds */
     static const int UPDATE_INTERVAL = 250000;
 
-	// 构造函数，初始化上述各成员变量
     CLIOptions()
     {
         input = NULL;
@@ -114,9 +112,9 @@ struct CLIOptions
     }
 
     void destroy();
-    void printStatus(uint32_t frameNum);					// 打印编码状态信息
-    bool parse(int argc, char **argv);						// 解释命令行参数
-    bool parseQPFile(x265_picture &pic_org);				// 解释量化因子QP文件
+    void printStatus(uint32_t frameNum);
+    bool parse(int argc, char **argv);
+    bool parseQPFile(x265_picture &pic_org);
 };
 
 void CLIOptions::destroy()
@@ -138,17 +136,14 @@ void CLIOptions::destroy()
     output = NULL;
 }
 
-/* 打印编码状态信息 */
 void CLIOptions::printStatus(uint32_t frameNum)
 {
     char buf[200];
     int64_t time = x265_mdate();
 
-	// 是否输出编码状态信息取决于：进度开关、当前编码帧数、上次信息输出和当前时间的间隔
     if (!bProgress || !frameNum || (prevUpdateTime && time - prevUpdateTime < UPDATE_INTERVAL))
         return;
 
-	// 计算编码帧率和码率
     int64_t elapsed = time - startTime;
     double fps = elapsed > 0 ? frameNum * 1000000. / elapsed : 0;
     float bitrate = 0.008f * totalbytes * (param->fpsNum / param->fpsDenom) / ((float)frameNum);
@@ -168,7 +163,6 @@ void CLIOptions::printStatus(uint32_t frameNum)
     prevUpdateTime = time;
 }
 
-/* 解释命令行参数 */
 bool CLIOptions::parse(int argc, char **argv)
 {
     bool bError = false;
@@ -176,9 +170,9 @@ bool CLIOptions::parse(int argc, char **argv)
     int inputBitDepth = 8;
     int outputBitDepth = 0;
     int reconFileBitDepth = 0;
-    const char *inputfn = NULL;						// 输入文件名
-    const char *reconfn = NULL;						// 重构文件名
-    const char *outputfn = NULL;					// 输出文件名
+    const char *inputfn = NULL;
+    const char *reconfn = NULL;
+    const char *outputfn = NULL;
     const char *preset = NULL;
     const char *tune = NULL;
     const char *profile = NULL;
@@ -193,7 +187,7 @@ bool CLIOptions::parse(int argc, char **argv)
     for (optind = 0;; )
     {
         int c = getopt_long(argc, argv, short_options, long_options, NULL);
-        if (c == -1)											// 选项结束或错误，退出循环
+        if (c == -1)
             break;
         else if (c == 'p')
             preset = optarg;
@@ -538,16 +532,6 @@ static int get_argv_utf8(int *argc_ptr, char ***argv_ptr)
  * 4 - encoder abort
  * 5 - unable to open csv file */
 
-/**
-* 返回码信息：
-* 0 – 编码成功；
-* 1 – 命令行解释失败；
-* 2 – 编码器打开失败；
-* 3 – 生成流头部失败；
-* 4 – 编码出错；
-* 5 – 打开csv文件失败.
-*/
-
 int main(int argc, char **argv)
 {
 #if HAVE_VLD
@@ -557,9 +541,7 @@ int main(int argc, char **argv)
     PROFILE_INIT();
     THREAD_NAME("API", 0);
 
-	// 获取控制台窗口的标题,保存在静态数组orgConsoleTitle中
     GetConsoleTitle(orgConsoleTitle, CONSOLE_TITLE_SIZE);
-	// 取消电源管理，避免睡眠、待机
     SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_AWAYMODE_REQUIRED);
 #if _WIN32
     char** orgArgv = argv;
@@ -569,8 +551,7 @@ int main(int argc, char **argv)
     ReconPlay* reconPlay = NULL;
     CLIOptions cliopt;
 
-	// 分析命令行参数，对编码器的参数进行设置，打开相关文件
-    if (cliopt.parse(argc, argv))	//==========分析参数，对编码器的参数进行设定，打开文件  
+    if (cliopt.parse(argc, argv))
     {
         cliopt.destroy();
         if (cliopt.api)
@@ -591,8 +572,7 @@ int main(int argc, char **argv)
      * the profile found during option parsing, but it must be done before
      * opening an encoder */
 
-	// 命令行解释阶段，依据参数profile的值可选择不同的 libx265 API.
-    x265_encoder *encoder = api->encoder_open(param);					//==========encoder_headers函数 打开编码器配置
+    x265_encoder *encoder = api->encoder_open(param);
     if (!encoder)
     {
         x265_log(param, X265_LOG_ERROR, "failed to open encoder\n");
@@ -619,34 +599,31 @@ int main(int argc, char **argv)
     }
 
     /* Control-C handler */
-	//当键入Ctrl-C的时候，当前执行程序调用指针函数sigint_handler 执行完后，再返回原来执行的地方接着往下走。 此处将变量b_ctrl_c设置为1，停止当前编码工作。
     if (signal(SIGINT, sigint_handler) == SIG_ERR)
         x265_log(param, X265_LOG_ERROR, "Unable to register CTRL+C handler: %s\n", strerror(errno));
 
-    x265_picture pic_orig, pic_out;				//定义x265的输入pic_orig和输出pic_out  
-    x265_picture *pic_in = &pic_orig;			//获取x265的输入pic_orig的地址  
+    x265_picture pic_orig, pic_out;
+    x265_picture *pic_in = &pic_orig;
     /* Allocate recon picture if analysisMode is enabled */
     std::priority_queue<int64_t>* pts_queue = cliopt.output->needPTS() ? new std::priority_queue<int64_t>() : NULL;
     x265_picture *pic_recon = (cliopt.recon || !!param->analysisMode || pts_queue || reconPlay || cliopt.csvLogLevel) ? &pic_out : NULL;
-    uint32_t inFrameCount = 0;							//输入的帧数 
-    uint32_t outFrameCount = 0;							//输出的帧数  
+    uint32_t inFrameCount = 0;
+    uint32_t outFrameCount = 0;
     x265_nal *p_nal;
     x265_stats stats;
     uint32_t nal;
     int16_t *errorBuf = NULL;
     int ret = 0;
 
-	// 如果不需要复制sps和pps放在每个关键帧的前面，则直接编码视频流的头
     if (!param->bRepeatHeaders)
     {
-        if (api->encoder_headers(encoder, &p_nal, &nal) < 0)						//==========encoder_headers函数  设置NAL相关信息
+        if (api->encoder_headers(encoder, &p_nal, &nal) < 0)
         {
             x265_log(param, X265_LOG_ERROR, "Failure generating stream headers\n");
             ret = 3;
             goto fail;
         }
         else
-			// 更新总字节数：增加头部字节数目
             cliopt.totalbytes += cliopt.output->writeHeaders(p_nal, nal);
     }
 
@@ -661,7 +638,7 @@ int main(int argc, char **argv)
             cliopt.bDither = false;
     }
 
-	// main encoder loop（编码主循环）  
+    // main encoder loop
     while (pic_in && !b_ctrl_c)
     {
         pic_orig.poc = inFrameCount;
@@ -675,12 +652,10 @@ int main(int argc, char **argv)
             }
         }
 
-		//当输入帧将要全部编码且输入的帧数大于或等于将要编码的帧数  
         if (cliopt.framesToBeEncoded && inFrameCount >= cliopt.framesToBeEncoded)
             pic_in = NULL;
-		// 成功读取一帧，则输入帧数增加1
-        else if (cliopt.input->readPicture(pic_orig))					 //每读入一帧 
-            inFrameCount++;												//输入的帧数自加1  
+        else if (cliopt.input->readPicture(pic_orig))
+            inFrameCount++;
         else
             pic_in = NULL;
 
@@ -688,8 +663,6 @@ int main(int argc, char **argv)
         {
             if (pic_in->bitDepth > param->internalBitDepth && cliopt.bDither)
             {
-				/* In-place downshift from a bit-depth greater than 8 to a bit-depth of 8, using
-				* the residual bits to dither each row. */
                 x265_dither_image(*api, *pic_in, cliopt.input->getWidth(), cliopt.input->getHeight(), errorBuf, param->internalBitDepth);
                 pic_in->bitDepth = param->internalBitDepth;
             }
@@ -697,10 +670,7 @@ int main(int argc, char **argv)
             pic_in->pts = pic_in->poc;
         }
 
-		//进行编码的入口函数，读入24帧后才开始编码  
-		// 进行编码入口函数，读入几十帧（具体多少帧依赖命令行参数的设置）之后才开始编码。
-		// numEncoded是本次编码出来的帧数，大部分情况下为1，如果是负数表示编码出错。
-        int numEncoded = api->encoder_encode(encoder, &p_nal, &nal, pic_in, pic_recon);				//==========encoder_encode()函数，numEncoded是将要编码的帧数  进入编码函数
+        int numEncoded = api->encoder_encode(encoder, &p_nal, &nal, pic_in, pic_recon);
         if (numEncoded < 0)
         {
             b_ctrl_c = 1;
@@ -726,16 +696,14 @@ int main(int argc, char **argv)
             }
         }
 
-        cliopt.printStatus(outFrameCount);					//打印编码帧的具体信息  
+        cliopt.printStatus(outFrameCount);
         if (numEncoded && cliopt.csvLogLevel)
             x265_csvlog_frame(cliopt.csvfpt, *param, *pic_recon, cliopt.csvLogLevel);
     }
 
     /* Flush the encoder */
-	/*功能：前面读入24帧后才开始编码，此处其实就是处理对应的倒数的24帧，将其存储*/
-    while (!b_ctrl_c)			 //退出上一个大循环后且没有按下Ctrl+C，代码继续执行  
+    while (!b_ctrl_c)
     {
-		//==========encoder_encode()函数 进入编码函数
         int numEncoded = api->encoder_encode(encoder, &p_nal, &nal, NULL, pic_recon);
         if (numEncoded < 0)
         {
@@ -779,7 +747,7 @@ fail:
     api->encoder_get_stats(encoder, &stats, sizeof(stats));
     if (cliopt.csvfpt && !b_ctrl_c)
         x265_csvlog_encode(cliopt.csvfpt, api->version_str, *param, stats, cliopt.csvLogLevel, argc, argv);
-    api->encoder_close(encoder);					//==========encoder_close()函数  结束编码并进行总结
+    api->encoder_close(encoder);
 
     int64_t second_largest_pts = 0;
     int64_t largest_pts = 0;
@@ -794,7 +762,7 @@ fail:
     }
     cliopt.output->closeFile(largest_pts, second_largest_pts);
 
-    if (b_ctrl_c)				//按下Ctrl+C，直接退出  
+    if (b_ctrl_c)
         general_log(param, NULL, X265_LOG_INFO, "aborted at input frame %d, output frame %d\n",
                     cliopt.seek + inFrameCount, stats.encodedPictureCount);
 
@@ -806,7 +774,7 @@ fail:
 
     X265_FREE(errorBuf);
 
-    SetConsoleTitle(orgConsoleTitle);							 //设置控制窗口标题  
+    SetConsoleTitle(orgConsoleTitle);
     SetThreadExecutionState(ES_CONTINUOUS);
 
 #if _WIN32

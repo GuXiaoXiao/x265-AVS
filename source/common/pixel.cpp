@@ -92,8 +92,6 @@ void sad_x3(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel
     }
 }
 
-
-// 菱形搜索算法
 template<int lx, int ly>
 void sad_x4(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
@@ -111,7 +109,6 @@ void sad_x4(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel
             res[3] += abs(pix1[x] - pix5[x]);
         }
 
-		// 两个stride分别是fref(参考帧)的和fenc(编码帧)的
         pix1 += FENC_STRIDE;
         pix2 += frefstride;
         pix3 += frefstride;
