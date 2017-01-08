@@ -645,16 +645,17 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
 {
     ALIGN_VAR_16(int, costs[16]);
     if (ctuAddr >= 0)
-        blockOffset = ref->reconPic->getLumaAddr(ctuAddr, absPartIdx) - ref->reconPic->getLumaAddr(0);			//CostEstimateGroup::estimateCUCost不会进入  ??？？？  
-    intptr_t stride = ref->lumaStride;
-    pixel* fenc = fencPUYuv.m_buf[0];													 // 获取参考帧的步长  
-    pixel* fref = srcReferencePlane == 0 ? ref->fpelPlane[0] + blockOffset : srcReferencePlane + blockOffset;
+		//CostEstimateGroup::estimateCUCost不会进入  ??？？？  得到重建影像亮度分片的地址
+        blockOffset = ref->reconPic->getLumaAddr(ctuAddr, absPartIdx) - ref->reconPic->getLumaAddr(0);			
+    intptr_t stride = ref->lumaStride;													// 参考帧亮度影像的步长
+    pixel* fenc = fencPUYuv.m_buf[0];													// 用来编码的帧 
+    pixel* fref = srcReferencePlane == 0 ? ref->fpelPlane[0] + blockOffset : srcReferencePlane + blockOffset;		// 得到参考帧的地址
 
 	// 设置当前的MVP  
     setMVP(qmvp);
 
-    MV qmvmin = mvmin.toQPel();											// 将最小mv扩大到分像素精度（1/4）  
-    MV qmvmax = mvmax.toQPel();											// 将最大mv扩大到分像素精度（1/4）  
+    MV qmvmin = mvmin.toQPel();											// 将最小mv扩大到分像素精度（1/4）  横纵坐标*4
+    MV qmvmax = mvmax.toQPel();											// 将最大mv扩大到分像素精度（1/4）	横纵坐标*4
 
     /* The term cost used here means satd/sad values for that particular search.
      * The costs used in ME integer search only includes the SAD cost of motion
@@ -674,8 +675,8 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
         bprecost = subpelCompare(ref, pmv, sad);										// 如果当前为普通参考帧，则进行标准的分像素搜索 
 
     /* re-measure full pel rounded MVP with SAD as search start point */
-    MV bmv = pmv.roundToFPel();															// 存储最优的整像素MV，初始化pmv，从pmv开始搜索  
-    int bcost = bprecost;																// 存储最优的cost值，初始化为pmv的sad值  
+    MV bmv = pmv.roundToFPel();															// BestMV   存储最优的整像素MV，初始化pmv，从pmv开始搜索  
+    int bcost = bprecost;																// BestCost 存储最优的cost值，初始化为pmv的sad值  
     if (pmv.isSubpel())
 		// 如果当前pmv有分像素精度，则将bcost更新为：整像素点的sad值加上整像素点的mvcost（MV与MVP之间的差（MVD）占用的bits-cost）  
         bcost = sad(fenc, FENC_STRIDE, fref + bmv.x + bmv.y * stride, stride) + mvcost(bmv << 2);			
@@ -696,6 +697,7 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
 
 	// 如果当前搜索的参考帧是1/2下采样参考帧  
     X265_CHECK(!(ref->isLowres && numCandidates), "lowres motion candidates not allowed\n")
+
     // measure SAD cost at each QPEL motion vector candidate
 	// 如果当前为普通参考帧  
     for (int i = 0; i < numCandidates; i++)
@@ -713,7 +715,7 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
     }
 
     pmv = pmv.roundToFPel();										// 将pmv四舍五入取整，在umh算法中用到  
-    MV omv = bmv;  // current search origin or starting point		设置搜索原点  
+    MV omv = bmv;  // OriginMV		设置搜索原点  
 
     switch (searchMethod)
     {
@@ -730,10 +732,10 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
 			//  3  
 			// 1/3/4/12用于标示不同的MV值，通过移位来实现从这些标号到不同MV的转换，具体如下：  
 			// 在X方向通过(bcost << 28) >> 30得到MV的x分量；在Y方向通过(bcost << 30) >> 30得到MV的y分量  
-			// 标号1， X方向：1 << 28 = 0x1000_0000，(1 << 28) >> 30 = 0；Y方向：1 << 30 = 0x4000_0000，(1 << 30) >> 30 = 1  
-			// 标号3， X方向：3 << 28 = 0x3000_0000，(1 << 28) >> 30 = 0；Y方向：3 << 30 = 0xc000_0000，(1 << 30) >> 30 = 0x8000_0001 = -1  
-			// 标号4， X方向：4 << 28 = 0x4000_0000，(1 << 28) >> 30 = 1；Y方向：4 << 30 = 0x0000_0000，(1 << 30) >> 30 = 0  
-			// 标号12 = 0xc，X方向：c << 28 = 0xc000_0000，(1 << 28) >> 30 = 0x1000_0001 = -1；Y方向：c << 30 = 0x0000_0000，(1 << 30) >> 30 = 0  
+			// 标号1，				00 | 01 = 1			X方向：1 << 28 = 0x1000_0000，(1 << 28) >> 30 = 0；Y方向：1 << 30 = 0x4000_0000，(1 << 30) >> 30 = 1  
+			// 标号3， X方向：		00 | 11 = 3			3 << 28 = 0x3000_0000，(1 << 28) >> 30 = 0；Y方向：3 << 30 = 0xc000_0000，(1 << 30) >> 30 = 0x8000_0001 = -1  
+			// 标号4， X方向：		01 | 00 = 4			4 << 28 = 0x4000_0000，(1 << 28) >> 30 = 1；Y方向：4 << 30 = 0x0000_0000，(1 << 30) >> 30 = 0  
+			// 标号12 = 0xc，X方向：	11 | 00 = 12		c << 28 = 0xc000_0000，(1 << 28) >> 30 = 0x1000_0001 = -1；Y方向：c << 30 = 0x0000_0000，(1 << 30) >> 30 = 0  
 			// X/Y方向的MV实际上是上面计算出来的MV的相反数，所以在之前加个负号即可。
             COST_MV_X4_DIR(0, -1, 0, 1, -1, 0, 1, 0, costs);							// 以上一次菱形迭代得到的最优点为中心，进行新一次菱形迭代，搜索上下左右四个点  
             if ((bmv.y - 1 >= mvmin.y) & (bmv.y - 1 <= mvmax.y))
