@@ -1,0 +1,101 @@
+﻿生成启动时间为 2017/1/8 9:39:48。
+     1>项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\x265-shared.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>CustomBuild:
+         Building Custom Rule C:/Users/YuqiaoDeng/Desktop/x265_2.2/source/CMakeLists.txt
+         CMake does not need to re-run because C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\generate.stamp is up-to-date.
+         Generating pixel-a.asm.obj
+         Generating const-a.asm.obj
+         Generating cpu-a.asm.obj
+         Generating ssd-a.asm.obj
+         Generating mc-a.asm.obj
+         Generating mc-a2.asm.obj
+         Generating pixel-util8.asm.obj
+         Generating blockcopy8.asm.obj
+         Generating pixeladd8.asm.obj
+         Generating dct8.asm.obj
+         Generating sad-a.asm.obj
+         Generating intrapred8.asm.obj
+         Generating intrapred8_allangs.asm.obj
+         Generating ipfilter8.asm.obj
+         Generating loopfilter.asm.obj
+         Generating pixel-32.asm.obj
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D WIN32 /D _WINDOWS /D _DEBUG /D X265_ARCH_X86=1 /D _CRT_SECURE_NO_WARNINGS /D HAVE_INT_TYPES_H=1 /D HIGH_BIT_DEPTH=0 /D X265_DEPTH=8 /D EXPORT_C_API=1 /D X265_NS=x265 /D _WIN32_WINNT=_WIN32_WINNT_WIN7 /D "CMAKE_INTDIR=\\\"Debug\\\"" /D x265_shared_EXPORTS /l"0x0409" /IC:\Users\YuqiaoDeng\Desktop\x265_2.2\source\. /IC:\Users\YuqiaoDeng\Desktop\x265_2.2\source\common /IC:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder /I"C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86" /IC:\Users\YuqiaoDeng\Desktop\x265_2.2\source\compat\getopt /nologo /fo"x265-shared.dir\Debug\x265.res" C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\x265.rc 
+       Link:
+         D:\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\Debug\libx265.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /DEF:"C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/x265.def" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/Debug/libx265.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/Debug/libx265.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /DLL "x265-shared.dir\Debug\x265.res"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\pixel-a.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\const-a.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\cpu-a.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\ssd-a.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\mc-a.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\mc-a2.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\pixel-util8.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\blockcopy8.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\pixeladd8.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\dct8.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\sad-a.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\intrapred8.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\intrapred8_allangs.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\ipfilter8.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\loopfilter.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\pixel-32.asm.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\analysis.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\search.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\bitcost.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\motion.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\slicetype.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\frameencoder.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\framefilter.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\level.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\nal.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\sei.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\sao.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\entropy.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\dpb.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\ratecontrol.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\reference.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\encoder.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\api.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\weightPrediction.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\asm-primitives.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\vec-primitives.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\dct-sse3.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\dct-ssse3.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\dct-sse41.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\winxp.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\primitives.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\pixel.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\dct.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\ipfilter.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\intrapred.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\loopfilter.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\constants.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\cpu.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\version.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\threading.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\threadpool.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\wavefront.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\md5.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\bitstream.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\yuv.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\shortyuv.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\picyuv.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\common.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\param.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\frame.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\framedata.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\cudata.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\slice.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\lowres.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\piclist.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\predict.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\scalinglist.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\quant.obj"
+         "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\common\common.dir\Debug\deblock.obj"
+            正在创建库 C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/Debug/libx265.lib 和对象 C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/Debug/libx265.exp
+         x265-shared.vcxproj -> C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\Debug\libx265.dll
+     1>已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\x265-shared.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:54.55

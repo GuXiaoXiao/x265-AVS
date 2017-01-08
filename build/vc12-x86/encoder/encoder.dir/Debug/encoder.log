@@ -1,0 +1,50 @@
+﻿生成启动时间为 2017/1/8 9:39:35。
+     1>项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.vcxproj”在节点 3 上(Rebuild 个目标)。
+     1>CustomBuild:
+         Building Custom Rule C:/Users/YuqiaoDeng/Desktop/x265_2.2/source/encoder/CMakeLists.txt
+         CMake does not need to re-run because C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\YuqiaoDeng\Desktop\x265_2.2\source\. /IC:\Users\YuqiaoDeng\Desktop\x265_2.2\source\common /IC:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder /I"C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86" /Zi /nologo /W4 /WX- /MP /Od /Ob2 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D X265_ARCH_X86=1 /D _CRT_SECURE_NO_WARNINGS /D HAVE_INT_TYPES_H=1 /D HIGH_BIT_DEPTH=0 /D X265_DEPTH=8 /D EXPORT_C_API=1 /D X265_NS=x265 /D _WIN32_WINNT=_WIN32_WINNT_WIN7 /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"encoder.dir\Debug\\" /Fd"encoder.dir\Debug\vc120.pdb" /Gd /TP /wd4701 /analyze- /errorReport:prompt C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\analysis.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\search.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\bitcost.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\motion.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\slicetype.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\frameencoder.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\framefilter.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\level.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\nal.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\sei.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\sao.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\entropy.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\dpb.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\ratecontrol.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\reference.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\encoder.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\api.cpp C:\Users\YuqiaoDeng\Desktop\x265_2.2\source\encoder\weightPrediction.cpp
+         analysis.cpp
+         search.cpp
+         bitcost.cpp
+         motion.cpp
+         slicetype.cpp
+         frameencoder.cpp
+         framefilter.cpp
+         level.cpp
+         nal.cpp
+         sei.cpp
+         sao.cpp
+         entropy.cpp
+         dpb.cpp
+         ratecontrol.cpp
+         reference.cpp
+         encoder.cpp
+         api.cpp
+         weightPrediction.cpp
+       Lib:
+         D:\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"encoder.dir\Debug\encoder.lib" /NOLOGO  /machine:X86 encoder.dir\Debug\analysis.obj
+         encoder.dir\Debug\search.obj
+         encoder.dir\Debug\bitcost.obj
+         encoder.dir\Debug\motion.obj
+         encoder.dir\Debug\slicetype.obj
+         encoder.dir\Debug\frameencoder.obj
+         encoder.dir\Debug\framefilter.obj
+         encoder.dir\Debug\level.obj
+         encoder.dir\Debug\nal.obj
+         encoder.dir\Debug\sei.obj
+         encoder.dir\Debug\sao.obj
+         encoder.dir\Debug\entropy.obj
+         encoder.dir\Debug\dpb.obj
+         encoder.dir\Debug\ratecontrol.obj
+         encoder.dir\Debug\reference.obj
+         encoder.dir\Debug\encoder.obj
+         encoder.dir\Debug\api.obj
+         encoder.dir\Debug\weightPrediction.obj
+         encoder.vcxproj -> C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.dir\Debug\encoder.lib
+     1>已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\encoder\encoder.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:11.62

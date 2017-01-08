@@ -1,0 +1,16 @@
+# CMake generation dependency list for this directory.
+C:/Users/YuqiaoDeng/Desktop/x265_2.2/source/common/CMakeLists.txt
+C:/Users/YuqiaoDeng/Desktop/x265_2.2/source/cmake/CMakeDetermineASM_YASMCompiler.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeDetermineASMCompiler.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeDetermineCompiler.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeDetermineCompilerId.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeCompilerIdDetection.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeParseArguments.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeFindBinUtils.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeASMCompiler.cmake.in
+C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/CMakeFiles/3.7.1/CMakeASM_YASMCompiler.cmake
+C:/Users/YuqiaoDeng/Desktop/x265_2.2/source/cmake/CMakeASM_YASMInformation.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeASMInformation.cmake
+C:/Users/YuqiaoDeng/Desktop/x265_2.2/source/cmake/CMakeTestASM_YASMCompiler.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeTestASMCompiler.cmake
+D:/CMake/share/cmake-3.7/Modules/CMakeConfigurableFile.in

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerCommandArguments>--input akiyo_qcif.yuv --output akiyo_qcif_QP37.bin --fps 60 --input-res 352x288 --frames 100 --preset 9 --b-adapt 0 --bframes 0 --frame-threads 1 --qp 40 --merange 64 --ref 1 --psnr --no-weightp --scenecut 0 --rc-lookahead 0 --aq-mode 0 --pools none --keyint -1 --tune psnr --csv-log-level 2 --csv akiyo_qcif_QP37.csv</LocalDebuggerCommandArguments>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)/Debug</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>

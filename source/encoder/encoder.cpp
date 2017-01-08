@@ -40,6 +40,13 @@
 
 #include "x265.h"
 
+#if !defined(UINT64_MAX)
+#include <limits.h>
+#define UINT64_MAX _UI64_MAX
+#define INT64_MAX _I64_MAX
+#define INT16_MAX  _I16_MAX
+#endif
+
 #if _MSC_VER
 #pragma warning(disable: 4996) // POSIX functions are just fine, thanks
 #endif

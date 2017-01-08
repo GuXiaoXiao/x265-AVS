@@ -1,0 +1,177 @@
+Checking whether the ASM_YASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+yasm 1.3.0
+Compiled on Aug 17 2014.
+Copyright (c) 2001-2014 Peter Johnson and other Yasm developers.
+Run yasm --license for licensing overview and summary.
+Checking whether the ASM_YASM compiler is HP using "-V" did not match "HP C":
+yasm: warning: unrecognized option `-V'
+yasm: No input files specified
+Checking whether the ASM_YASM compiler is Intel using "--version" did not match "(ICC)":
+yasm 1.3.0
+Compiled on Aug 17 2014.
+Copyright (c) 2001-2014 Peter Johnson and other Yasm developers.
+Run yasm --license for licensing overview and summary.
+Checking whether the ASM_YASM compiler is SunPro using "-V" did not match "Sun C":
+yasm: warning: unrecognized option `-V'
+yasm: No input files specified
+Checking whether the ASM_YASM compiler is XL using "-qversion" did not match "XL C":
+yasm: warning: unrecognized option `-qversion'
+yasm: No input files specified
+Checking whether the ASM_YASM compiler is MSVC using "/?" did not match "Microsoft":
+yasm: file name already has no extension: output will be in `yasm.out'
+yasm: FATAL: Could not open input file
+Checking whether the ASM_YASM compiler is TI using "-h" did not match "Texas Instruments":
+usage: yasm [option]* file
+Options:
+    --version               show version text
+    --license               show license text
+    -h, --help              show help text
+    --arch=<arch>           select architecture (list with -a help)
+     -a <arch>
+    --parser=<parser>       select parser (list with -p help)
+     -p <parser>
+    --preproc=<preproc>     select preprocessor (list with -r help)
+     -r <preproc>
+    --oformat=<format>      select object format (list with -f help)
+     -f <format>
+    --dformat=<debug>       select debugging format (list with -g help)
+     -g <debug>
+    --lformat=<list>        select list format (list with -L help)
+     -L <list>
+    --list=<listfile>       name of list-file output
+     -l <listfile>
+    --objfile=<filename>    name of object-file output
+     -o <filename>
+    --mapfile=<filename>    name of map-file output
+    --machine=<machine>     select machine (list with -m help)
+     -m <machine>
+    --force-strict          treat all sized operands as if `strict' was used
+    -w                      inhibits warning messages
+    -W                      enables/disables warning
+    -M                      generate Makefile dependencies on stdout
+    -E <file>               redirect error messages to file
+    -s                      redirect error messages to stdout
+    -e, --preproc-only      preprocess only (writes output to stdout by default)
+    -i <path>               add include path
+    -I <path>               add include path
+    -P <filename>           pre-include file
+    -d <macro[=value]>      pre-define a macro, optionally to value
+    -D <macro[=value]>      pre-define a macro, optionally to value
+    -u <macro>              undefine a macro
+    -U <macro>              undefine a macro
+    -X <style>              select error/warning message style (`gnu' or `vc')
+    --prefix=<prefix>       prepend argument to name of all external symbols
+    --suffix=<suffix>       append argument to name of all external symbols
+    --postfix=<suffix>      append argument to name of all external symbols
+
+Files are asm sources to be assembled.
+
+Sample invocation:
+   yasm -f elf -o object.o source.asm
+
+Report bugs to bug-yasm@tortall.net
+Checking whether the ASM_YASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+yasm 1.3.0
+Compiled on Aug 17 2014.
+Copyright (c) 2001-2014 Peter Johnson and other Yasm developers.
+Run yasm --license for licensing overview and summary.
+Checking whether the ASM_YASM compiler is IAR using "" did not match "IAR Assembler":
+yasm: No input files specified
+Checking whether the ASM_YASM compiler is ARMCC using "" did not match "(ARM Compiler)|(ARM Assembler)":
+yasm: No input files specified
+Determining if the strtok_r exist failed with the following output:
+Change Dir: C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTC_cf725.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft(R) 生成引擎版本 12.0.40629.0
+[Microsoft .NET Framework 版本 4.0.30319.42000]
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2017/1/8 9:35:58。
+节点 1 上的项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_cf725.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_cf725.dir\Debug\”。
+  正在创建目录“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_cf725.dir\Debug\cmTC_cf725.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_cf725.dir\Debug\cmTC_cf725.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_cf725.dir\Debug\\" /Fd"cmTC_cf725.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.40629 版版权所有(C) Microsoft Corporation。  保留所有权利。
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_cf725.dir\Debug\\" /Fd"cmTC_cf725.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckSymbolExists.c"
+  
+  CheckSymbolExists.c
+C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): error C2065: “strtok_r”: 未声明的标识符 [C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_cf725.vcxproj]
+已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_cf725.vcxproj”(默认目标)的操作 - 失败。
+
+生成失败。
+
+“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_cf725.vcxproj”(默认目标) (1) ->
+(ClCompile 目标) -> 
+  C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckSymbolExists.c(8): error C2065: “strtok_r”: 未声明的标识符 [C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_cf725.vcxproj]
+
+    0 个警告
+    1 个错误
+
+已用时间 00:00:00.63
+
+File C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtok_r
+  return ((int*)(&strtok_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if files getopt.h exist failed with the following output:
+Change Dir: C:/Users/YuqiaoDeng/Desktop/x265_2.2/build/vc12-x86/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTC_21357.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft(R) 生成引擎版本 12.0.40629.0
+[Microsoft .NET Framework 版本 4.0.30319.42000]
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+生成启动时间为 2017/1/8 9:35:59。
+节点 1 上的项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_21357.vcxproj”(默认目标)。
+PrepareForBuild:
+  正在创建目录“cmTC_21357.dir\Debug\”。
+  正在创建目录“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTC_21357.dir\Debug\cmTC_21357.tlog\”。
+InitializeBuildStatus:
+  正在创建“cmTC_21357.dir\Debug\cmTC_21357.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+ClCompile:
+  D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_21357.dir\Debug\\" /Fd"cmTC_21357.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckIncludeFiles.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.40629 版版权所有(C) Microsoft Corporation。  保留所有权利。
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_21357.dir\Debug\\" /Fd"cmTC_21357.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckIncludeFiles.c"
+  
+  CheckIncludeFiles.c
+C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckIncludeFiles.c(2): fatal error C1083: 无法打开包括文件: “getopt.h”: No such file or directory [C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_21357.vcxproj]
+已完成生成项目“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_21357.vcxproj”(默认目标)的操作 - 失败。
+
+生成失败。
+
+“C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_21357.vcxproj”(默认目标) (1) ->
+(ClCompile 目标) -> 
+  C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\CheckIncludeFiles.c(2): fatal error C1083: 无法打开包括文件: “getopt.h”: No such file or directory [C:\Users\YuqiaoDeng\Desktop\x265_2.2\build\vc12-x86\CMakeFiles\CMakeTmp\cmTC_21357.vcxproj]
+
+    0 个警告
+    1 个错误
+
+已用时间 00:00:00.51
+
+Source:
+/* */
+#include <getopt.h>
+
+
+int main(void){return 0;}
+

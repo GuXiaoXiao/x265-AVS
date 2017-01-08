@@ -29,6 +29,13 @@
 #include "picyuv.h"
 #include "sao.h"
 
+#if !defined(UINT64_MAX)
+#include <limits.h>
+#define UINT64_MAX _UI64_MAX
+#define INT64_MAX _I64_MAX
+#define INT16_MAX  _I16_MAX
+#endif
+
 namespace {
 
 inline int32_t roundIBDI(int32_t num, int32_t den)

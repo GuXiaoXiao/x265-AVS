@@ -28,6 +28,13 @@
 #include "common.h"
 #include "slice.h"
 
+#if !defined(UINT64_MAX)
+#include <limits.h>
+#define UINT64_MAX _UI64_MAX
+#define INT64_MAX _I64_MAX
+#define INT16_MAX  _I16_MAX
+#endif
+
 namespace X265_NS {
 // private namespace
 
