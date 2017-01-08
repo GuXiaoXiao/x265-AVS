@@ -355,6 +355,20 @@ void MotionEstimate::setSourcePU(const Yuv& srcFencYuv, int _ctuAddr, int cuPart
         } \
     }
 
+
+/**
+* 函数功能：星形ME搜索
+/*  调用范围        只在MotionEstimate::motionEstimate函数中被调用
+* \参数  ref        参考帧
+* \参数  mvmin      输出的实际搜索范围（左边界和上边界）
+* \参数  mvmax      输出的实际搜索范围（下边界和右边界）
+* \参数  bmv        从AMVP得到的预测MV，并返回最优的MV
+* \参数  bcost      预测MV对应的cost，并返回最优的cost
+* \参数  bPointNr   返回最优的MV对应的位置标号，该位置标号在下面ME的搜索模板中标出
+* \参数  bDistance  返回最优的MV对应的步长
+* \参数  earlyExitIters 提前跳出的迭代次数
+* \参数  merange    输入的ME搜索范围
+*/
 void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
                                        const MV &       mvmin,
                                        const MV &       mvmax,
@@ -365,28 +379,31 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
                                        int              earlyExitIters,
                                        int              merange)
 {
-    ALIGN_VAR_16(int, costs[16]);
-    pixel* fenc = fencPUYuv.m_buf[0];
-    pixel* fref = ref->fpelPlane[0] + blockOffset;
-    intptr_t stride = ref->lumaStride;
+    ALIGN_VAR_16(int, costs[16]);	
+    pixel* fenc = fencPUYuv.m_buf[0];									// 待搜索块的Y分量数据指针  
+    pixel* fref = ref->fpelPlane[0] + blockOffset;						// 待匹配帧对应位置的Y分量数据指针  
+    intptr_t stride = ref->lumaStride;									// 参考帧Y分量数据宽度  
 
     MV omv = bmv;
     int saved = bcost;
-    int rounds = 0;
+    int rounds = 0;														// 在上次搜索到最优MV后，有多少轮没有更新最优MV，如果rounds>earlyExitIters，说明这次搜索偏差较大，提前结束搜索
 
+	// 在步长为1时进行小菱形搜索 
     {
         int16_t dist = 1;
 
-        /* bPointNr
-              2
-            4 * 5
-              7
-         */
+		/* bPointNr
+		2
+		4 * 5
+		7
+		*/
+		// 找到小十字搜索的位置边界，并检查是否超过设定的界限  
         const int16_t top    = omv.y - dist;
         const int16_t bottom = omv.y + dist;
         const int16_t left   = omv.x - dist;
         const int16_t right  = omv.x + dist;
 
+		// 如果四个点都没有超过设定的界限，计算这四个位置的失真（sad+mvcost）  
         if (top >= mvmin.y && left >= mvmin.x && right <= mvmax.x && bottom <= mvmax.y)
         {
             COST_MV_PT_DIST_X4(omv.x,  top,    2, dist,
@@ -394,7 +411,7 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
                                right, omv.y,   5, dist,
                                omv.x,  bottom, 7, dist);
         }
-        else
+        else // 如果四个点中有超过设定界限的情况，则计算没有超过界限的MV的失真（sad+mvcost）  
         {
             if (top >= mvmin.y) // check top
             {
@@ -413,12 +430,15 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
                 COST_MV_PT_DIST(omv.x, bottom, 7, dist);
             }
         }
+		// 如果找到比之前搜索更优的点，则将rounds置零  
         if (bcost < saved)
             rounds = 0;
+		// 在允许的迭代次数中都无法找到更优的MV，则提前结束本轮搜索  
         else if (++rounds >= earlyExitIters)
             return;
     }
 
+	// 在步长小于8时进行菱形搜索，每次搜索的步长是上次的两倍  
     for (int16_t dist = 2; dist <= 8; dist <<= 1)
     {
         /* bPointNr
@@ -430,6 +450,7 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
          Points 2, 4, 5, 7 are dist
          Points 1, 3, 6, 8 are dist>>1
          */
+		// 找到菱形搜索的位置边界，并检查是否超过设定的界限  
         const int16_t top     = omv.y - dist;
         const int16_t bottom  = omv.y + dist;
         const int16_t left    = omv.x - dist;
@@ -438,10 +459,10 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
         const int16_t bottom2 = omv.y + (dist >> 1);
         const int16_t left2   = omv.x - (dist >> 1);
         const int16_t right2  = omv.x + (dist >> 1);
-        saved = bcost;
+        saved = bcost;								// 更新上一轮的最优cost
 
         if (top >= mvmin.y && left >= mvmin.x &&
-            right <= mvmax.x && bottom <= mvmax.y) // check border
+            right <= mvmax.x && bottom <= mvmax.y) // check border	// 如果8个点都没有超过设定的界限，计算这8个位置的失真（sad+mvcost）  
         {
             COST_MV_PT_DIST_X4(omv.x,  top,   2, dist,
                                left2,  top2,  1, dist >> 1,
@@ -452,7 +473,7 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
                                right2, bottom2, 8, dist >> 1,
                                omv.x,  bottom,  7, dist);
         }
-        else // check border for each mv
+        else // check border for each mv // 如果8个点中有超过设定界限的情况，则计算没有超过界限的MV的失真（sad+mvcost）  
         {
             if (top >= mvmin.y) // check top
             {
@@ -494,22 +515,24 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
             }
         }
 
-        if (bcost < saved)
+        if (bcost < saved)										// 如果找到比之前搜索更优的点，则将rounds置零  
             rounds = 0;
-        else if (++rounds >= earlyExitIters)
+        else if (++rounds >= earlyExitIters)					// 在允许的迭代次数中都无法找到更优的MV，则提前结束本轮搜索  
             return;
     }
 
+	// 在步长大于等于16时，进行大十字搜索（每一个步长下的大十字都呈现发散的形状）  
     for (int16_t dist = 16; dist <= (int16_t)merange; dist <<= 1)
     {
+		// 找到大十字搜索的位置边界，并检查是否超过设定的界限  
         const int16_t top    = omv.y - dist;
         const int16_t bottom = omv.y + dist;
         const int16_t left   = omv.x - dist;
         const int16_t right  = omv.x + dist;
 
-        saved = bcost;
+        saved = bcost;											// 更新上一轮的最优cost  
         if (top >= mvmin.y && left >= mvmin.x &&
-            right <= mvmax.x && bottom <= mvmax.y) // check border
+            right <= mvmax.x && bottom <= mvmax.y) // check border	 // 如果所有需要搜索的点都没有超过设定的界限，计算这些位置的失真（sad+mvcost）  
         {
             /* index
                   0
@@ -523,11 +546,13 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
                   0
             */
 
+			// 首先计算最外圈的标号为0的位置  
             COST_MV_PT_DIST_X4(omv.x,  top,    0, dist,
                                left,   omv.y,  0, dist,
                                right,  omv.y,  0, dist,
                                omv.x,  bottom, 0, dist);
 
+			// 之后逐渐向中心位置检测  
             for (int16_t index = 1; index < 4; index++)
             {
                 int16_t posYT = top    + ((dist >> 2) * index);
@@ -541,7 +566,7 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
                                    posXR, posYB, 0, dist);
             }
         }
-        else // check border for each mv
+        else // check border for each mv		// 如果需要搜索的点中有超过设定界限的情况，则计算没有超过界限的MV的失真（sad+mvcost）  
         {
             if (top >= mvmin.y) // check top
             {
@@ -591,13 +616,23 @@ void MotionEstimate::StarPatternSearch(ReferencePlanes *ref,
             }
         }
 
-        if (bcost < saved)
+        if (bcost < saved)											// 如果找到比之前搜索更优的点，则将rounds置零  
             rounds = 0;
-        else if (++rounds >= earlyExitIters)
+        else if (++rounds >= earlyExitIters)						// 在允许的迭代次数中都无法找到更优的MV，则提前结束本轮搜索  
             return;
     }
 }
 
+/** 函数功能             ： 运动估计，获取最优的MV
+/*  调用范围             ：只在Search::predInterSearch、singleMotionEstimation和CostEstimateGroup::estimateCUCost函数中被调用
+* \参数 mvmin            ：最小MV（整像素精度）
+* \参数 mvmax            ：最大MV(整像素精度）
+* \参数 qmvp             ：MVP（分像素精度（1/4））
+* \参数 numCandidates    ：当前的候选参考帧个数 ??？？？
+* \参数 mvc              ：当前的MVC（MV candidates）列表
+* \参数 merange          ：当前的搜索窗口
+* \参数 outQMv           ：返回最优的MV
+* \返回                  ：返回最优MV所花费的cost **/
 int MotionEstimate::motionEstimate(ReferencePlanes *ref,
                                    const MV &       mvmin,
                                    const MV &       mvmax,
@@ -610,15 +645,16 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
 {
     ALIGN_VAR_16(int, costs[16]);
     if (ctuAddr >= 0)
-        blockOffset = ref->reconPic->getLumaAddr(ctuAddr, absPartIdx) - ref->reconPic->getLumaAddr(0);
+        blockOffset = ref->reconPic->getLumaAddr(ctuAddr, absPartIdx) - ref->reconPic->getLumaAddr(0);			//CostEstimateGroup::estimateCUCost不会进入  ??？？？  
     intptr_t stride = ref->lumaStride;
-    pixel* fenc = fencPUYuv.m_buf[0];
+    pixel* fenc = fencPUYuv.m_buf[0];													 // 获取参考帧的步长  
     pixel* fref = srcReferencePlane == 0 ? ref->fpelPlane[0] + blockOffset : srcReferencePlane + blockOffset;
 
+	// 设置当前的MVP  
     setMVP(qmvp);
 
-    MV qmvmin = mvmin.toQPel();
-    MV qmvmax = mvmax.toQPel();
+    MV qmvmin = mvmin.toQPel();											// 将最小mv扩大到分像素精度（1/4）  
+    MV qmvmax = mvmax.toQPel();											// 将最大mv扩大到分像素精度（1/4）  
 
     /* The term cost used here means satd/sad values for that particular search.
      * The costs used in ME integer search only includes the SAD cost of motion
@@ -628,25 +664,28 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
      * (mode + MVD bits). */
 
     // measure SAD cost at clipped QPEL MVP
-    MV pmv = qmvp.clipped(qmvmin, qmvmax);
-    MV bestpre = pmv;
-    int bprecost;
+    MV pmv = qmvp.clipped(qmvmin, qmvmax);												// 防止mvp越界 clip操作  
+    MV bestpre = pmv;																	// 存储周边块最优的pmv  
+    int bprecost;																		// 存储周边块最优的cost 
 
     if (ref->isLowres)
-        bprecost = ref->lowresQPelCost(fenc, blockOffset, pmv, sad);
+        bprecost = ref->lowresQPelCost(fenc, blockOffset, pmv, sad);					// 如果当前搜索的参考帧是1/2分辨率采样参考帧：获取伪分像素插值的sad值  
     else
-        bprecost = subpelCompare(ref, pmv, sad);
+        bprecost = subpelCompare(ref, pmv, sad);										// 如果当前为普通参考帧，则进行标准的分像素搜索 
 
     /* re-measure full pel rounded MVP with SAD as search start point */
-    MV bmv = pmv.roundToFPel();
-    int bcost = bprecost;
+    MV bmv = pmv.roundToFPel();															// 存储最优的整像素MV，初始化pmv，从pmv开始搜索  
+    int bcost = bprecost;																// 存储最优的cost值，初始化为pmv的sad值  
     if (pmv.isSubpel())
-        bcost = sad(fenc, FENC_STRIDE, fref + bmv.x + bmv.y * stride, stride) + mvcost(bmv << 2);
+		// 如果当前pmv有分像素精度，则将bcost更新为：整像素点的sad值加上整像素点的mvcost（MV与MVP之间的差（MVD）占用的bits-cost）  
+        bcost = sad(fenc, FENC_STRIDE, fref + bmv.x + bmv.y * stride, stride) + mvcost(bmv << 2);			
 
     // measure SAD cost at MV(0) if MVP is not zero
+	// 因为下面的搜索算法是先按照整像素点进行搜索，所以在此先排除分像素插值带来的影响 
+	// 如果pmv不是零向量，尝试MV（0,0）当作搜索原点是否更优  
     if (pmv.notZero())
     {
-        int cost = sad(fenc, FENC_STRIDE, fref, stride) + mvcost(MV(0, 0));
+        int cost = sad(fenc, FENC_STRIDE, fref, stride) + mvcost(MV(0, 0));					// 获取MV（0,0）的代价值：sad+mvcost  
         if (cost < bcost)
         {
             bcost = cost;
@@ -655,14 +694,16 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
         }
     }
 
+	// 如果当前搜索的参考帧是1/2下采样参考帧  
     X265_CHECK(!(ref->isLowres && numCandidates), "lowres motion candidates not allowed\n")
     // measure SAD cost at each QPEL motion vector candidate
+	// 如果当前为普通参考帧  
     for (int i = 0; i < numCandidates; i++)
     {
         MV m = mvc[i].clipped(qmvmin, qmvmax);
         if (m.notZero() & (m != pmv ? 1 : 0) & (m != bestpre ? 1 : 0)) // check already measured
         {
-            int cost = subpelCompare(ref, m, sad) + mvcost(m);
+            int cost = subpelCompare(ref, m, sad) + mvcost(m);			// 获取伪分像素插值的sad值+mvcost  
             if (cost < bprecost)
             {
                 bprecost = cost;
@@ -671,39 +712,50 @@ int MotionEstimate::motionEstimate(ReferencePlanes *ref,
         }
     }
 
-    pmv = pmv.roundToFPel();
-    MV omv = bmv;  // current search origin or starting point
+    pmv = pmv.roundToFPel();										// 将pmv四舍五入取整，在umh算法中用到  
+    MV omv = bmv;  // current search origin or starting point		设置搜索原点  
 
     switch (searchMethod)
     {
+	// 菱形（迭代）搜索，仅在preset为ultrafast级别时，才选择这种搜索方法  
     case X265_DIA_SEARCH:
     {
         /* diamond search, radius 1 */
-        bcost <<= 4;
+        bcost <<= 4;					 // 左移4位，空出来的低4位用于判断是否有更好的MV(即可以得到更小的cost)  
         int i = merange;
         do
         {
-            COST_MV_X4_DIR(0, -1, 0, 1, -1, 0, 1, 0, costs);
+			//  1  
+			//4 * 12  
+			//  3  
+			// 1/3/4/12用于标示不同的MV值，通过移位来实现从这些标号到不同MV的转换，具体如下：  
+			// 在X方向通过(bcost << 28) >> 30得到MV的x分量；在Y方向通过(bcost << 30) >> 30得到MV的y分量  
+			// 标号1， X方向：1 << 28 = 0x1000_0000，(1 << 28) >> 30 = 0；Y方向：1 << 30 = 0x4000_0000，(1 << 30) >> 30 = 1  
+			// 标号3， X方向：3 << 28 = 0x3000_0000，(1 << 28) >> 30 = 0；Y方向：3 << 30 = 0xc000_0000，(1 << 30) >> 30 = 0x8000_0001 = -1  
+			// 标号4， X方向：4 << 28 = 0x4000_0000，(1 << 28) >> 30 = 1；Y方向：4 << 30 = 0x0000_0000，(1 << 30) >> 30 = 0  
+			// 标号12 = 0xc，X方向：c << 28 = 0xc000_0000，(1 << 28) >> 30 = 0x1000_0001 = -1；Y方向：c << 30 = 0x0000_0000，(1 << 30) >> 30 = 0  
+			// X/Y方向的MV实际上是上面计算出来的MV的相反数，所以在之前加个负号即可。
+            COST_MV_X4_DIR(0, -1, 0, 1, -1, 0, 1, 0, costs);							// 以上一次菱形迭代得到的最优点为中心，进行新一次菱形迭代，搜索上下左右四个点  
             if ((bmv.y - 1 >= mvmin.y) & (bmv.y - 1 <= mvmax.y))
                 COPY1_IF_LT(bcost, (costs[0] << 4) + 1);
             if ((bmv.y + 1 >= mvmin.y) & (bmv.y + 1 <= mvmax.y))
                 COPY1_IF_LT(bcost, (costs[1] << 4) + 3);
             COPY1_IF_LT(bcost, (costs[2] << 4) + 4);
             COPY1_IF_LT(bcost, (costs[3] << 4) + 12);
-            if (!(bcost & 15))
+            if (!(bcost & 15))															// 假如检查的四个点中没有更好的MV，则直接结束菱形搜索 
                 break;
-            bmv.x -= (bcost << 28) >> 30;
+            bmv.x -= (bcost << 28) >> 30;												// 按照标号计算出相对于bmv的MV，并更新最优的MV
             bmv.y -= (bcost << 30) >> 30;
-            bcost &= ~15;
+            bcost &= ~15;																// 清除低4位的MV标示  
         }
-        while (--i && bmv.checkRange(mvmin, mvmax));
-        bcost >>= 4;
+        while (--i && bmv.checkRange(mvmin, mvmax));									// 直到超出搜索窗格或者超过搜索允许的范围，则停止搜索  
+        bcost >>= 4;																	// 右移四位，得出实际的最优cost 
         break;
     }
 
     case X265_HEX_SEARCH:
     {
-me_hex2:
+me_hex2:				 //goto 标号，在umh算法中会用到  
         /* hexagon search, radius 2 */
 #if 0
         for (int i = 0; i < merange / 2; i++)
@@ -722,18 +774,117 @@ me_hex2:
         }
 
 #else // if 0
-      /* equivalent to the above, but eliminates duplicate candidates */
-        COST_MV_X3_DIR(-2, 0, -1, 2,  1, 2, costs);
-        bcost <<= 3;
+		/* equivalent to the above, but eliminates duplicate candidates */
+
+		/*
+		假设当前搜索帧为：
+		86  90  97  96  91  91 105  98 110 100 104 108 113  78  46  35
+		96 101 107 117 129 127 134 135 120 100 104  97  53  37  34  32
+		137 139 141 137 137 137 139 141 125 127  92  41  37  32  30  31
+		140 136 151 147 152 156 154 139 145  74  41  37  33  30  33  34
+		61  64  62  57 103  67  90  83  62  48  45  35  32  33  34  32
+		66  73  69  90  75  67  92  66  49  44  35  34  33  30  32  32
+		75  93  59  99  60  67  64  50  48  41  37  33  33  32  32  32
+		78  83  65  73  73  62  48  49  45  39  34  34  31  33  31  34
+		71  52  83  96  68  49  53  45  44  34  32  33  32  31  34  31
+		46  49  62  70  55  50  49  43  37  36  37  35  30  35  29  30
+		51  65  87  63  48  51  50  44  36  37  37  35  34  30  31  35
+		60  84  94  46  47  50  49  43  44  37  36  37  30  32  34  36
+		93  80  53  47  50  51  46  45  42  39  39  32  38  39  39  40
+		99  68  46  47  52  48  44  44  41  38  33  36  35  34  38  38
+		84  52  46  50  49  47  45  45  43  31  36  38  37  40  35  38
+		72  44  50  52  49  47  47  47  33  34  40  35  36  33  35  36
+
+		其搜索块为右下角8x8：block_enc =
+		44  34  32  33  32  31  34  31
+		37  36  37  35  30  35  29  30
+		36  37  37  35  34  30  31  35
+		44  37  36  37  30  32  34  36
+		42  39  39  32  38  39  39  40
+		41  38  33  36  35  34  38  38
+		43  31  36  38  37  40  35  38
+		33  34  40  35  36  33  35  36
+
+		参考帧为：
+		87  94 101  98  97  96 105 102 103  93  98 103  61  39  35  33  33  31  37  43
+		102 104 104 122 127 130 132 135 119 106 100  44  38  34  30  31  32  38  38  46
+		153 148 141 151 148 147 146 136 136  82  39  37  33  30  30  34  35  36  43  45
+		126 122 132 138 146 140 133 130  76  43  39  35  32  31  34  32  31  35  40  44
+		62  66  62  56 102  70  90  68  53  45  36  34  35  33  32  32  33  38  42  46
+		63  74  61 108  62  74  68  51  45  40  36  34  33  32  33  32  35  37  42  40
+		82  94  54  94  63  61  50  48  42  41  34  32  32  33  33  33  37  36  36  49
+		83  74  71  78  65  50  51  45  39  36  32  31  33  31  32  33  30  35  43  40
+		64  52  89  80  53  50  47  44  39  33  35  34  31  33  34  30  34  39  41  42
+		47  57  66  60  49  51  47  45  37  35  38  37  33  31  30  34  36  38  41  44
+		54  75  86  46  51  48  48  42  38  36  34  35  34  31  32  35  36  41  39  46
+		70  83  53  49  51  52  47  42  42  36  37  36  33  37  39  40  40  40  39  43
+		91  67  44  46  49  48  45  42  41  38  34  32  34  33  35  36  35  39  48  56
+		85  49  45  48  48  47  43  46  41  34  31  36  34  38  38  34  37  35  43  47
+		66  44  47  52  48  46  44  46  38  30  36  34  34  34  31  32  33  46  40  43
+		48  48  51  50  48  47  46  44  30  37  41  36  34  32  33  40  47  31  33  48
+		42  49  50  47  45  49  49  33  37  45  41  38  37  34  37  38  27  40  52  41
+		46  46  49  44  46  50  44  33  45  47  40  37  38  45  47  31  45  62  59  45
+		44  47  48  40  47  45  30  42  49  42  38  38  49  42  31  36  44  56  55  51
+		49  51  45  46  53  40  43  48  54  48  50  55  42  28  34  38  49  49  55  39
+
+		其对应位置的参考块为：右下角8x8  （注意：当前不是16x16，而是20x20）
+		39  33  35  34  31  33  34  30
+		37  35  38  37  33  31  30  34
+		38  36  34  35  34  31  32  35
+		42  36  37  36  33  37  39  40
+		41  38  34  32  34  33  35  36
+		41  34  31  36  34  38  38  34
+		38  30  36  34  34  34  31  32
+		30  37  41  36  34  32  33  40
+
+		假设当前的整像素搜索原点为bmv = （0，-1)（整像素精度） ，MVP为（1,-4）(分像素精度) qp = 12
+
+		当前的搜索算法是六边形：
+		*(-1,-2)   * (1,-2)
+
+		(-2,0)  *                         *(2,0)
+
+		* (-1,2)     * (1,2)
+		**/
+		/*
+		以(-2,0) 为例：则当前的偏移坐标为 bmv+(-2,0) = （-2，-1）
+		所以其参考块为：block_ref
+		51  45  39  36  32  31  33  31
+		47  44  39  33  35  34  31  33
+		47  45  37  35  38  37  33  31
+		48  42  38  36  34  35  34  31
+		47  42  42  36  37  36  33  37
+		45  42  41  38  34  32  34  33
+		43  46  41  34  31  36  34  38
+		44  46  38  30  36  34  34  34
+
+		求其SAD得到= Σabs(block_enc - block_ref) = 249
+
+		当前MV（整像素精度）（-2，-1） 其分像素精度 (-8,-4)
+		当前的MVD = MV-MVP = (-8,-4) - (1,-4) = （-9,0） ,qp = 12
+		mvcostx = λ*bits = 2^(qp/6-2) * s_bitsizes[i] =2^(qp/6-2)* (2*(log2(9+1))+e-1) = 2log2(10) + e -1 = 8.3621  四舍五入： 8
+		mvcosty = λ*bits = 2^(qp/6-2) * s_bitsizes[i] =2^(qp/6-2)* (e-2) = e - 2 = 0.7183 四舍五入：1
+		mvcost  = mvcostx + mvcosty = 8+1 =9
+		cost    = SAD + mvcost = 249+9 = 258
+		同理求得其它点为：188,263
+		**/
+
+		// 六边形搜索算法各个位置的标号及其对应的MV如下：  
+		//    7(-1,-2)  6(1,-2)  
+		// 2(-2,0)         5(2,0)  
+		//    3(-1,2)   4(1,2)  
+
+        COST_MV_X3_DIR(-2, 0, -1, 2,  1, 2, costs);					// 搜索六边形的下三点，并将cost存入costs中  
+        bcost <<= 3;												// 将当前的最优cost扩大3位，低3位用于存储MV的位置标号  
         if ((bmv.y >= mvmin.y) & (bmv.y <= mvmax.y))
-            COPY1_IF_LT(bcost, (costs[0] << 3) + 2);
+            COPY1_IF_LT(bcost, (costs[0] << 3) + 2);				// 依次比较bcost， 其中cost 分别+2 +3 +4 +5 +6 +7，通过这些标号可以直接用获取最优的mv  
         if ((bmv.y + 2 >= mvmin.y) & (bmv.y + 2 <= mvmax.y))
         {
             COPY1_IF_LT(bcost, (costs[1] << 3) + 3);
             COPY1_IF_LT(bcost, (costs[2] << 3) + 4);
         }
 
-        COST_MV_X3_DIR(2, 0,  1, -2, -1, -2, costs);
+        COST_MV_X3_DIR(2, 0,  1, -2, -1, -2, costs);				// 搜索六边形的上三点，并将cost存入costs中 
         if ((bmv.y >= mvmin.y) & (bmv.y <= mvmax.y))
             COPY1_IF_LT(bcost, (costs[0] << 3) + 5);
         if ((bmv.y - 2 >= mvmin.y) & (bmv.y - 2 <= mvmax.y))
@@ -742,25 +893,28 @@ me_hex2:
             COPY1_IF_LT(bcost, (costs[2] << 3) + 7);
         }
 
-        if (bcost & 7)
+        if (bcost & 7)												// 如果当前搜索的点有比bcost小的， 否则直接退出  
         {
-            int dir = (bcost & 7) - 2;
+            int dir = (bcost & 7) - 2;								// 计算dir，MV的标号 2 3 4 5 6 7 对应的dir为： 0 1 2 3 4 5  
 
             if ((bmv.y + hex2[dir + 1].y >= mvmin.y) & (bmv.y + hex2[dir + 1].y <= mvmax.y))
             {
-                bmv += hex2[dir + 1];
+                bmv += hex2[dir + 1];								// 找到最优mv（其实是相对bmv的最优mv），更新最优bmv。并以最新的点作为新的搜索起点  
 
                 /* half hexagon, not overlapping the previous iteration */
+
+				// const MV hex2[8] = { MV(-1, -2), MV(-2, 0), MV(-1, 2), MV(1, 2), MV(2, 0), MV(1, -2), MV(-1, -2), MV(-2, 0) };  
+				// 快速算法，只搜索半个六边形  
                 for (int i = (merange >> 1) - 1; i > 0 && bmv.checkRange(mvmin, mvmax); i--)
                 {
                     COST_MV_X3_DIR(hex2[dir + 0].x, hex2[dir + 0].y,
                         hex2[dir + 1].x, hex2[dir + 1].y,
                         hex2[dir + 2].x, hex2[dir + 2].y,
                         costs);
-                    bcost &= ~7;
+                    bcost &= ~7;									// 清除cost中用于标示mv的低3位  
 
                     if ((bmv.y + hex2[dir + 0].y >= mvmin.y) & (bmv.y + hex2[dir + 0].y <= mvmax.y))
-                        COPY1_IF_LT(bcost, (costs[0] << 3) + 1);
+                        COPY1_IF_LT(bcost, (costs[0] << 3) + 1);	// 使用标号1 2 3来标示搜索的半个六边形的3个点  
 
                     if ((bmv.y + hex2[dir + 1].y >= mvmin.y) & (bmv.y + hex2[dir + 1].y <= mvmax.y))
                         COPY1_IF_LT(bcost, (costs[1] << 3) + 2);
@@ -768,19 +922,24 @@ me_hex2:
                     if ((bmv.y + hex2[dir + 2].y >= mvmin.y) & (bmv.y + hex2[dir + 2].y <= mvmax.y))
                         COPY1_IF_LT(bcost, (costs[2] << 3) + 3);
 
-                    if (!(bcost & 7))
+                    if (!(bcost & 7))								// 如果当前搜索无法获得更优的MV,则直接退出  
                         break;
 
-                    dir += (bcost & 7) - 2;
-                    dir = mod6m1[dir + 1];
-                    bmv += hex2[dir + 1];
+                    dir += (bcost & 7) - 2;							// (bcost & 7) - 2 取值是 -1 0 1 s
+                    dir = mod6m1[dir + 1];							// 更新dir找到下一次六边形搜索得中心点, const uint8_t mod6m1[8] = { 5, 0, 1, 2, 3, 4, 5, 0 };  /* (x-1)%6 */  
+                    bmv += hex2[dir + 1];							// 更新最优的mv
                 }
             } // if ((bmv.y + hex2[dir + 1].y >= mvmin.y) & (bmv.y + hex2[dir + 1].y <= mvmax.y))
         }
-        bcost >>= 3;
+        bcost >>= 3;												// 最后恢复cost  
 #endif // if 0
 
         /* square refine */
+		// 用六边形搜索的可能不够准确，再在当前最优搜索点的四周进行一次8点的方形搜索,寻求最优mv  
+		// 搜索模板：  
+		//  5 1 7  
+		//  3 0 4  
+		//  6 2 8  
         int dir = 0;
         COST_MV_X4_DIR(0, -1,  0, 1, -1, 0, 1, 0, costs);
         if ((bmv.y - 1 >= mvmin.y) & (bmv.y - 1 <= mvmax.y))
@@ -802,6 +961,8 @@ me_hex2:
         break;
     }
 
+	// UMH(Unsymmetric-Cross Multi-Hexagon-Grid)搜索  
+	// 在x265不同配置下默认都不会被调用  
     case X265_UMH_SEARCH:
     {
         int ucost1, ucost2;
@@ -1418,75 +1579,81 @@ me_hex2:
     return bcost;
 }
 
+/** 函数功能             ： 对一个分像素MV位置进行插值，并估计所花费的cost
+/*  调用范围             ：只在MotionEstimate::motionEstimate函数中被调用
+* \参数 ref              ：参考帧
+* \参数 qmv              ：1/4像素精度的MV
+* \参数 cmp              ：计算distortion所使用的函数
+* \返回                  ：所花费的cost **/
 int MotionEstimate::subpelCompare(ReferencePlanes *ref, const MV& qmv, pixelcmp_t cmp)
 {
     intptr_t refStride = ref->lumaStride;
     const pixel* fref = ref->fpelPlane[0] + blockOffset + (qmv.x >> 2) + (qmv.y >> 2) * refStride;
-    int xFrac = qmv.x & 0x3;
-    int yFrac = qmv.y & 0x3;
+    int xFrac = qmv.x & 0x3;							// 得到MV中的x分量中的分像素MV  
+    int yFrac = qmv.y & 0x3;							// 得到MV中的y分量中的分像素MV 
     int cost;
     const intptr_t fencStride = FENC_STRIDE;
     X265_CHECK(fencPUYuv.m_size == FENC_STRIDE, "fenc buffer is assumed to have FENC_STRIDE by sad_x3 and sad_x4\n");
 
     ALIGN_VAR_32(pixel, subpelbuf[MAX_CU_SIZE * MAX_CU_SIZE]);
     
-    if (!(yFrac | xFrac))
+    if (!(yFrac | xFrac))								// 如果输入的MV为整像素MV，则直接跳过插值，使用整像素参考帧计算cost  
         cost = cmp(fencPUYuv.m_buf[0], fencStride, fref, refStride);
-    else
+    else												// 否则需要首先插值，再计算cost  
     {
         /* we are taking a short-cut here if the reference is weighted. To be
          * accurate we should be interpolating unweighted pixels and weighting
          * the final 16bit values prior to rounding and down shifting. Instead we
          * are simply interpolating the weighted full-pel pixels. Not 100%
          * accurate but good enough for fast qpel ME */
-        if (!yFrac)
+        if (!yFrac)										// 如果是整数行，则只需进行横向插值  
             primitives.pu[partEnum].luma_hpp(fref, refStride, subpelbuf, blockwidth, xFrac);
-        else if (!xFrac)
+        else if (!xFrac)								// 如果是整数列，则只需进行纵向插值  
             primitives.pu[partEnum].luma_vpp(fref, refStride, subpelbuf, blockwidth, yFrac);
-        else
+        else											// 如果既不是整数行也不是整数列，那么就需要先进行横向插值，再进行纵向插值 
             primitives.pu[partEnum].luma_hvpp(fref, refStride, subpelbuf, blockwidth, xFrac, yFrac);
-        cost = cmp(fencPUYuv.m_buf[0], fencStride, subpelbuf, blockwidth);
+        cost = cmp(fencPUYuv.m_buf[0], fencStride, subpelbuf, blockwidth);							// 得到分像素位置的cost，  
     }
 
-    if (bChromaSATD)
+    if (bChromaSATD)									// 如果对chroma也计算satd
     {
-        int csp    = fencPUYuv.m_csp;
-        int hshift = fencPUYuv.m_hChromaShift;
-        int vshift = fencPUYuv.m_vChromaShift;
+        int csp    = fencPUYuv.m_csp;					// 读取YUV的数据格式
+        int hshift = fencPUYuv.m_hChromaShift;			// 色度宽度需要移位个数
+        int vshift = fencPUYuv.m_vChromaShift;			// 色度高度需要移位个数 
         int mvx = qmv.x << (1 - hshift);
         int mvy = qmv.y << (1 - vshift);
         intptr_t fencStrideC = fencPUYuv.m_csize;
 
-        intptr_t refStrideC = ref->reconPic->m_strideC;
-        intptr_t refOffset = (mvx >> 3) + (mvy >> 3) * refStrideC;
+        intptr_t refStrideC = ref->reconPic->m_strideC;								// 得到参考帧色度的步长 
+        intptr_t refOffset = (mvx >> 3) + (mvy >> 3) * refStrideC;					// 得到色度分量在YUV数据中的地址偏移  
 
-        const pixel* refCb = ref->getCbAddr(ctuAddr, absPartIdx) + refOffset;
-        const pixel* refCr = ref->getCrAddr(ctuAddr, absPartIdx) + refOffset;
+        const pixel* refCb = ref->getCbAddr(ctuAddr, absPartIdx) + refOffset;		// 得到cb分量的地址  
+        const pixel* refCr = ref->getCrAddr(ctuAddr, absPartIdx) + refOffset;		// 得到cr分量的地址  
 
         X265_CHECK((hshift == 0) || (hshift == 1), "hshift must be 0 or 1\n");
         X265_CHECK((vshift == 0) || (vshift == 1), "vshift must be 0 or 1\n");
 
-        xFrac = mvx & 7;
-        yFrac = mvy & 7;
+        xFrac = mvx & 7;								// 得到MV中的x分量中的分像素MV，对于YUV420，由于色度块的长和宽均为亮度的1/2，所以色度MV是1/8像素精度。
+        yFrac = mvy & 7;								// 得到MV中的y分量中的分像素MV 
 
-        if (!(yFrac | xFrac))
+        if (!(yFrac | xFrac))							// 如果输入的MV为整像素MV，则直接跳过插值，使用整像素参考帧计算cost(色度分量的cost包括cb/cr两部分)  
         {
             cost += chromaSatd(fencPUYuv.m_buf[1], fencStrideC, refCb, refStrideC);
             cost += chromaSatd(fencPUYuv.m_buf[2], fencStrideC, refCr, refStrideC);
         }
-        else
+        else											// 否则需要首先插值，再计算cost  
         {
             int blockwidthC = blockwidth >> hshift;
 
-            if (!yFrac)
+            if (!yFrac)									// 如果是整数行，则只需进行横向插值 
             {
-                primitives.chroma[csp].pu[partEnum].filter_hpp(refCb, refStrideC, subpelbuf, blockwidthC, xFrac);
-                cost += chromaSatd(fencPUYuv.m_buf[1], fencStrideC, subpelbuf, blockwidthC);
+                primitives.chroma[csp].pu[partEnum].filter_hpp(refCb, refStrideC, subpelbuf, blockwidthC, xFrac);						// cb色度分量横向插值  
+                cost += chromaSatd(fencPUYuv.m_buf[1], fencStrideC, subpelbuf, blockwidthC);											// 计算cb分量的cost
 
-                primitives.chroma[csp].pu[partEnum].filter_hpp(refCr, refStrideC, subpelbuf, blockwidthC, xFrac);
-                cost += chromaSatd(fencPUYuv.m_buf[2], fencStrideC, subpelbuf, blockwidthC);
+                primitives.chroma[csp].pu[partEnum].filter_hpp(refCr, refStrideC, subpelbuf, blockwidthC, xFrac);						// cr色度分量横向插值
+                cost += chromaSatd(fencPUYuv.m_buf[2], fencStrideC, subpelbuf, blockwidthC);											// 计算cr分量的cost
             }
-            else if (!xFrac)
+            else if (!xFrac)							// 如果是整数列，则只需进行纵向插值  
             {
                 primitives.chroma[csp].pu[partEnum].filter_vpp(refCb, refStrideC, subpelbuf, blockwidthC, yFrac);
                 cost += chromaSatd(fencPUYuv.m_buf[1], fencStrideC, subpelbuf, blockwidthC);
@@ -1494,7 +1661,7 @@ int MotionEstimate::subpelCompare(ReferencePlanes *ref, const MV& qmv, pixelcmp_
                 primitives.chroma[csp].pu[partEnum].filter_vpp(refCr, refStrideC, subpelbuf, blockwidthC, yFrac);
                 cost += chromaSatd(fencPUYuv.m_buf[2], fencStrideC, subpelbuf, blockwidthC);
             }
-            else
+            else										// 如果既不是整数行也不是整数列，那么就需要先进行横向插值，再进行纵向插值  
             {
                 ALIGN_VAR_32(int16_t, immed[MAX_CU_SIZE * (MAX_CU_SIZE + NTAPS_LUMA - 1)]);
                 const int halfFilterSize = (NTAPS_CHROMA >> 1);
